@@ -1,0 +1,2 @@
+-- Este microservicio no necesita datos iniciales obligatorios.
+-- Los envíos se crean desde Postman usando el id de una orden real de Ventas.

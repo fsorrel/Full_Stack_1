@@ -1,0 +1,2 @@
+-- Este microservicio no necesita datos iniciales obligatorios.
+-- Las órdenes se crean desde Postman validando stock contra Inventario.
