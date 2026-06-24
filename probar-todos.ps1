@@ -1,5 +1,5 @@
-# Compila los 12 microservicios de VetNova uno por uno.
-# Uso: abrir PowerShell en la raiz del proyecto y ejecutar:  .\compilar-todos.ps1
+# Ejecuta las pruebas unitarias (mvn test) de los 12 microservicios.
+# Uso: abrir PowerShell en la raiz del proyecto y ejecutar:  .\probar-todos.ps1
 # Requiere Maven (mvn) y JDK 17+ en el PATH.
 
 $raiz = $PSScriptRoot
@@ -26,7 +26,7 @@ foreach ($servicio in $servicios) {
     $carpeta = Join-Path $raiz $servicio
     Write-Host ""
     Write-Host "==============================================" -ForegroundColor Cyan
-    Write-Host " Compilando: $servicio" -ForegroundColor Cyan
+    Write-Host " Probando: $servicio" -ForegroundColor Cyan
     Write-Host "==============================================" -ForegroundColor Cyan
 
     if (-not (Test-Path $carpeta)) {
@@ -40,12 +40,9 @@ foreach ($servicio in $servicios) {
         continue
     }
 
-    # Usar mvnw.cmd del gateway si mvn no está en el PATH
-    $mvn = if (Get-Command mvn -ErrorAction SilentlyContinue) { "mvn" } else { "$raiz\getawayspring-profeAlejandro\mvnw.cmd" }
-
     Push-Location $carpeta
     try {
-        & $mvn clean package -q -DskipTests
+        mvn test -q
         if ($LASTEXITCODE -eq 0) {
             Write-Host "OK: $servicio" -ForegroundColor Green
             $resultados += [PSCustomObject]@{ Servicio = $servicio; Estado = "OK" }
@@ -65,7 +62,7 @@ $resultados | Format-Table -AutoSize
 
 $fallidos = ($resultados | Where-Object { $_.Estado -ne "OK" }).Count
 if ($fallidos -eq 0) {
-    Write-Host "Los 12 microservicios compilaron correctamente." -ForegroundColor Green
+    Write-Host "Los 12 microservicios pasaron sus pruebas unitarias." -ForegroundColor Green
 } else {
     Write-Host "$fallidos servicio(s) con problemas. Revisar arriba." -ForegroundColor Red
 }
