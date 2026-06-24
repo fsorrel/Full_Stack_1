@@ -1,4 +1,0 @@
-MERGE INTO categorias_ticket (id, nombre, descripcion, area_por_defecto, prioridad_default, activo) KEY(id) VALUES (1, 'Consulta general', 'Consultas sobre atención, horarios o servicios', 'RECEPCION', 2, true);
-MERGE INTO categorias_ticket (id, nombre, descripcion, area_por_defecto, prioridad_default, activo) KEY(id) VALUES (2, 'Reclamo clínico', 'Reclamos o dudas asociadas a una atención médica', 'VETERINARIA', 4, true);
-MERGE INTO categorias_ticket (id, nombre, descripcion, area_por_defecto, prioridad_default, activo) KEY(id) VALUES (3, 'Pedido o compra', 'Problemas con compras, pedidos o reservas', 'VENTAS', 3, true);
-MERGE INTO categorias_ticket (id, nombre, descripcion, area_por_defecto, prioridad_default, activo) KEY(id) VALUES (4, 'Problema de plataforma', 'Errores de acceso o funcionamiento web/app', 'SISTEMAS', 3, true);
